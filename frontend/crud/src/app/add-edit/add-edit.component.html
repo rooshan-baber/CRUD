@@ -1,0 +1,27 @@
+<h2 mat-dialog-title class="text-center">{{service.addEditTitle}}</h2>
+<form class="d-grid mt-4 mx-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="card row">
+    <mat-form-field class="col-12">
+        <input matInput placeholder="Name" formControlName="name">
+        <mat-error *ngIf="form.get('name')?.hasError('required')">Name is required</mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="col-12">
+        <input matInput placeholder="Description" formControlName="desc">
+        <mat-error *ngIf="form.get('desc')?.hasError('required')">Description is required</mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="col-12">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('category')?.hasError('required')">Category is required</mat-error>
+      </mat-form-field>
+      
+  </mat-dialog-content>
+  <mat-dialog-actions class="d-flex justify-content-end mt-5">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-button color="primary" type="submit" [disabled]="form.invalid">{{service.addEditButton}}</button>
+  </mat-dialog-actions>
+</form>
